@@ -1,0 +1,3986 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#5A1024">
+<meta name="description" content="Jarmund&Co – juridista apua Lahdessa.">
+<title>Jarmund&Co – Lahti</title>
+
+<style>
+:root{
+  --b:#5A1024;
+  --bd:#3B0A18;
+  --bk:#260812;
+  --iv:#F5F1EA;
+  --iv2:#EFEAE1;
+  --ch:#B49A78;
+  --ink:#20191A;
+  --muted:#756D69;
+  --ln:rgba(0,0,0,.12);
+  --white:#fff;
+  --max:1240px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+  background:var(--iv);
+}
+
+body{
+  margin:0;
+  background:var(--iv);
+  color:var(--ink);
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+body.menu-open{
+  overflow:hidden;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+::selection{
+  background:var(--b);
+  color:#fff;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+#progress{
+  position:fixed;
+  z-index:1000;
+  top:0;
+  left:0;
+  width:0;
+  height:2px;
+  background:var(--b);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:900;
+  background:rgba(245,241,234,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--ln);
+  transition:
+    padding .35s var(--ease),
+    box-shadow .35s ease,
+    background .35s ease;
+}
+
+.nav-inner{
+  width:min(var(--max),calc(100% - 48px));
+  min-height:92px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  gap:26px;
+  transition:min-height .35s var(--ease);
+}
+
+.site-header.scrolled{
+  box-shadow:0 8px 25px rgba(0,0,0,.045);
+}
+
+.site-header.scrolled .nav-inner{
+  min-height:68px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-shrink:0;
+}
+
+.brand-mark{
+  width:39px;
+  height:39px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--b);
+  color:var(--b);
+  font-family:Georgia,serif;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.brand-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1;
+}
+
+.brand-text strong{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:19px;
+  font-weight:600;
+  letter-spacing:.02em;
+}
+
+.brand-text small{
+  margin-top:5px;
+  font-size:8px;
+  letter-spacing:.28em;
+  color:var(--muted);
+}
+
+.desktop-nav{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.desktop-nav a{
+  position:relative;
+  padding:7px 0;
+  color:#433A3A;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.desktop-nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:1px;
+  background:var(--b);
+  transition:width .25s ease;
+}
+
+.desktop-nav a:hover::after,
+.desktop-nav a.active::after{
+  width:100%;
+}
+
+/* =========================
+   LANGUAGE SWITCHER
+========================= */
+
+.language-switcher{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  margin-left:4px;
+  padding:3px;
+  border:1px solid rgba(0,0,0,.14);
+  background:rgba(255,255,255,.3);
+  flex-shrink:0;
+}
+
+.language-switcher button{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:var(--bd);
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.11em;
+  padding:8px 9px;
+  cursor:pointer;
+  transition:
+    background .22s ease,
+    color .22s ease,
+    transform .22s ease;
+}
+
+.language-switcher button:hover{
+  background:rgba(90,16,36,.08);
+}
+
+.language-switcher button.active{
+  background:var(--b);
+  color:#fff;
+}
+
+.language-switcher button:active{
+  transform:translateY(1px);
+}
+
+.language-switcher button:focus-visible{
+  outline:2px solid var(--b);
+  outline-offset:2px;
+}
+
+/* =========================
+   MENU BUTTON
+========================= */
+
+.menu-toggle{
+  display:none;
+  width:42px;
+  height:42px;
+  padding:10px;
+  border:1px solid var(--ln);
+  background:transparent;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+}
+
+.menu-toggle span{
+  width:100%;
+  height:1px;
+  background:var(--b);
+  transition:transform .3s ease;
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.mobile-menu{
+  position:fixed;
+  z-index:850;
+  inset:68px 0 0;
+  background:var(--iv);
+  transform:translateY(-15px);
+  opacity:0;
+  pointer-events:none;
+  transition:
+    opacity .3s ease,
+    transform .3s var(--ease);
+  overflow:auto;
+  border-top:1px solid var(--ln);
+}
+
+.mobile-menu.open{
+  transform:translateY(0);
+  opacity:1;
+  pointer-events:auto;
+}
+
+.mobile-menu-inner{
+  width:min(var(--max),calc(100% - 40px));
+  margin:auto;
+  padding:34px 0 50px;
+}
+
+.mobile-nav{
+  display:flex;
+  flex-direction:column;
+}
+
+.mobile-nav a{
+  padding:17px 0;
+  border-bottom:1px solid var(--ln);
+  font-family:Georgia,serif;
+  font-size:25px;
+  color:var(--bd);
+}
+
+.mobile-language{
+  margin-top:28px;
+}
+
+.mobile-language-label{
+  margin-bottom:10px;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+main{
+  min-height:70vh;
+}
+
+.container{
+  width:min(var(--max),calc(100% - 48px));
+  margin:auto;
+}
+
+.section{
+  padding:105px 0;
+  border-bottom:1px solid var(--ln);
+}
+
+.section-sm{
+  padding:70px 0;
+  border-bottom:1px solid var(--ln);
+}
+
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:20px;
+  color:var(--b);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+}
+
+.eyebrow::before{
+  content:"";
+  width:34px;
+  height:1px;
+  background:var(--ch);
+}
+
+h1,h2,h3,h4{
+  margin:0;
+  color:var(--bd);
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:500;
+  line-height:1.05;
+}
+
+h1{
+  font-size:clamp(47px,6vw,82px);
+  letter-spacing:-.045em;
+}
+
+h2{
+  font-size:clamp(36px,4.4vw,58px);
+  letter-spacing:-.035em;
+}
+
+h3{
+  font-size:25px;
+}
+
+p{
+  margin:0 0 16px;
+}
+
+.lead{
+  max-width:700px;
+  margin-top:25px;
+  color:#544C4B;
+  font-size:18px;
+  line-height:1.8;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.rule{
+  width:100%;
+  height:1px;
+  background:var(--ln);
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:49px;
+  padding:0 22px;
+  border:1px solid var(--b);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  overflow:hidden;
+  transition:
+    color .3s ease,
+    background .3s ease,
+    transform .25s ease;
+}
+
+.btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--b);
+  transform:translateY(101%);
+  transition:transform .3s var(--ease);
+  z-index:-1;
+}
+
+.btn:hover{
+  color:#fff;
+  transform:translateY(-2px);
+}
+
+.btn:hover::before{
+  transform:translateY(0);
+}
+
+.btn-primary{
+  color:#fff;
+  background:var(--b);
+}
+
+.btn-primary::before{
+  background:var(--bd);
+  transform:translateY(0);
+}
+
+.btn-secondary{
+  color:var(--b);
+  background:transparent;
+}
+
+.btn-secondary:hover{
+  color:#fff;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  padding:92px 0 100px;
+  border-bottom:1px solid var(--ln);
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  gap:80px;
+  align-items:center;
+}
+
+.hero-copy{
+  max-width:730px;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:34px;
+}
+
+.hero-note{
+  margin-top:18px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.hero-visual{
+  position:relative;
+  min-height:470px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.document{
+  position:relative;
+  width:min(390px,90%);
+  min-height:460px;
+  background:#fffdf9;
+  border:1px solid rgba(0,0,0,.13);
+  padding:42px 38px;
+  box-shadow:18px 24px 55px rgba(38,8,18,.09);
+  transform:rotate(2.2deg);
+}
+
+.document::before{
+  content:"";
+  position:absolute;
+  left:-15px;
+  top:27px;
+  width:100%;
+  height:100%;
+  border:1px solid rgba(90,16,36,.14);
+  background:#f8f4ed;
+  z-index:-1;
+  transform:rotate(-4deg);
+}
+
+.doc-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  border-bottom:1px solid var(--ln);
+  padding-bottom:18px;
+}
+
+.doc-logo{
+  color:var(--b);
+  font-family:Georgia,serif;
+  font-size:18px;
+}
+
+.doc-number{
+  color:var(--muted);
+  font-size:8px;
+  letter-spacing:.12em;
+}
+
+.doc-title{
+  margin-top:43px;
+  color:var(--bd);
+  font-family:Georgia,serif;
+  font-size:29px;
+  line-height:1.12;
+}
+
+.doc-lines{
+  margin-top:32px;
+}
+
+.doc-line{
+  height:6px;
+  margin-bottom:13px;
+  background:#ded8cf;
+}
+
+.doc-line.short{
+  width:62%;
+}
+
+.doc-line.medium{
+  width:80%;
+}
+
+.stamp{
+  position:absolute;
+  right:24px;
+  bottom:42px;
+  width:92px;
+  height:92px;
+  display:grid;
+  place-items:center;
+  border:2px solid var(--b);
+  border-radius:50%;
+  color:var(--b);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.11em;
+  text-align:center;
+  transform:rotate(-12deg);
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--ln);
+}
+
+.stat{
+  padding:42px 30px;
+  border-right:1px solid var(--ln);
+}
+
+.stat:last-child{
+  border-right:0;
+}
+
+.stat-number{
+  color:var(--b);
+  font-family:Georgia,serif;
+  font-size:42px;
+  line-height:1;
+}
+
+.stat-label{
+  margin-top:12px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.stat-note{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+  position:relative;
+  border:1px solid var(--ln);
+  background:rgba(255,255,255,.25);
+  padding:30px;
+  transition:
+    transform .35s var(--ease),
+    background .35s ease,
+    border-color .35s ease;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  background:#fffdf9;
+  border-color:rgba(90,16,36,.25);
+}
+
+.card-number{
+  margin-bottom:38px;
+  color:var(--ch);
+  font-family:Georgia,serif;
+  font-size:13px;
+}
+
+.card h3{
+  margin-bottom:13px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.card-price{
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px solid var(--ln);
+  color:var(--b);
+  font-size:12px;
+  font-weight:800;
+}
+
+.card-arrow{
+  display:inline-block;
+  margin-top:22px;
+  color:var(--b);
+  font-size:18px;
+  transition:transform .25s ease;
+}
+
+.card:hover .card-arrow{
+  transform:translateX(5px);
+}
+
+/* =========================
+   STEPS
+========================= */
+
+.steps{
+  counter-reset:step;
+}
+
+.step{
+  position:relative;
+  display:grid;
+  grid-template-columns:80px 1fr;
+  gap:30px;
+  padding:31px 0;
+  border-bottom:1px solid var(--ln);
+}
+
+.step:first-child{
+  border-top:1px solid var(--ln);
+}
+
+.step-number{
+  color:var(--b);
+  font-family:Georgia,serif;
+  font-size:34px;
+}
+
+.step h3{
+  margin-bottom:8px;
+}
+
+.step p{
+  margin:0;
+  color:var(--muted);
+}
+
+/* =========================
+   TRUST
+========================= */
+
+.trust{
+  background:var(--bd);
+  color:#fff;
+}
+
+.trust h2{
+  color:#fff;
+}
+
+.trust .eyebrow{
+  color:var(--ch);
+}
+
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  margin-top:50px;
+  border-top:1px solid rgba(255,255,255,.18);
+}
+
+.trust-item{
+  padding:30px 25px 0 0;
+  margin-right:25px;
+  border-right:1px solid rgba(255,255,255,.18);
+}
+
+.trust-item:last-child{
+  border-right:0;
+}
+
+.trust-item h3{
+  color:#fff;
+  font-size:21px;
+  margin-bottom:12px;
+}
+
+.trust-item p{
+  color:rgba(255,255,255,.66);
+  font-size:13px;
+}
+
+/* =========================
+   TEAM
+========================= */
+
+.team-photo{
+  height:290px;
+  margin-bottom:22px;
+  background:var(--iv2);
+  border:1px solid var(--ln);
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+
+.team-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.initials{
+  color:var(--b);
+  font-family:Georgia,serif;
+  font-size:50px;
+}
+
+.team-title{
+  margin-top:7px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.team-area{
+  margin-top:12px;
+  color:var(--b);
+  font-size:12px;
+  font-weight:700;
+}
+
+/* =========================
+   GUIDE
+========================= */
+
+.guide-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  border-top:1px solid var(--ln);
+}
+
+.guide-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:25px 5px 25px 0;
+  border-bottom:1px solid var(--ln);
+}
+
+.guide-item:nth-child(odd){
+  margin-right:40px;
+}
+
+.guide-item:nth-child(even){
+  padding-left:40px;
+  border-left:1px solid var(--ln);
+}
+
+.guide-item span:first-child{
+  color:var(--bd);
+  font-family:Georgia,serif;
+  font-size:21px;
+}
+
+.guide-arrow{
+  color:var(--b);
+  font-size:20px;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+  border-top:1px solid var(--ln);
+}
+
+.faq-item{
+  border-bottom:1px solid var(--ln);
+}
+
+.faq-question{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:24px 0;
+  border:0;
+  background:none;
+  color:var(--bd);
+  text-align:left;
+  font-family:Georgia,serif;
+  font-size:21px;
+}
+
+.faq-icon{
+  position:relative;
+  width:22px;
+  height:22px;
+  flex-shrink:0;
+}
+
+.faq-icon::before,
+.faq-icon::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:16px;
+  height:1px;
+  background:var(--b);
+  transform:translate(-50%,-50%);
+  transition:transform .3s ease;
+}
+
+.faq-icon::after{
+  transform:translate(-50%,-50%) rotate(90deg);
+}
+
+.faq-item.open .faq-icon::after{
+  transform:translate(-50%,-50%) rotate(0);
+}
+
+.faq-answer{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .35s var(--ease);
+}
+
+.faq-answer-inner{
+  overflow:hidden;
+}
+
+.faq-answer p{
+  max-width:800px;
+  padding:0 0 25px;
+  color:var(--muted);
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-layout{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:80px;
+}
+
+.contact-details{
+  margin-top:40px;
+}
+
+.contact-detail{
+  padding:18px 0;
+  border-bottom:1px solid var(--ln);
+}
+
+.contact-detail small{
+  display:block;
+  margin-bottom:5px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.contact-detail strong{
+  color:var(--bd);
+  font-family:Georgia,serif;
+  font-size:20px;
+  font-weight:500;
+}
+
+.form{
+  padding:38px;
+  border:1px solid var(--ln);
+  background:#fffdf9;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.field{
+  margin-bottom:18px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:7px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  border:1px solid var(--ln);
+  background:var(--iv);
+  color:var(--ink);
+  padding:13px 14px;
+  outline:none;
+  transition:border-color .2s ease,background .2s ease;
+}
+
+.field textarea{
+  min-height:145px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:var(--b);
+  background:#fff;
+}
+
+.form-note{
+  margin-top:14px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+/* =========================
+   PRICE TABLE
+========================= */
+
+.price-table{
+  border-top:1px solid var(--ln);
+}
+
+.price-row{
+  display:grid;
+  grid-template-columns:1fr 220px;
+  gap:30px;
+  padding:22px 0;
+  border-bottom:1px solid var(--ln);
+}
+
+.price-row strong{
+  color:var(--bd);
+  font-family:Georgia,serif;
+  font-size:19px;
+  font-weight:500;
+}
+
+.price-row span{
+  color:var(--b);
+  text-align:right;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* =========================
+   DETAIL PAGE
+========================= */
+
+.detail-hero{
+  padding:85px 0 65px;
+  border-bottom:1px solid var(--ln);
+}
+
+.detail-body{
+  max-width:820px;
+}
+
+.detail-body h3{
+  margin:45px 0 15px;
+}
+
+.detail-body p,
+.detail-body li{
+  color:#554D4B;
+}
+
+.detail-body ul{
+  padding-left:22px;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-block{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+}
+
+.about-quote{
+  padding:38px;
+  border-left:2px solid var(--b);
+  background:var(--iv2);
+}
+
+.about-quote p{
+  color:var(--bd);
+  font-family:Georgia,serif;
+  font-size:25px;
+  line-height:1.4;
+}
+
+/* =========================
+   SAMPLE NOTICE
+========================= */
+
+.demo-notice{
+  margin-bottom:35px;
+  padding:13px 16px;
+  border:1px solid rgba(90,16,36,.22);
+  background:rgba(90,16,36,.045);
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  background:var(--bk);
+  color:#fff;
+  padding:70px 0 30px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr 1fr;
+  gap:45px;
+}
+
+.footer-brand{
+  font-family:Georgia,serif;
+  font-size:26px;
+}
+
+.footer-city{
+  margin-top:7px;
+  color:var(--ch);
+  font-size:9px;
+  letter-spacing:.22em;
+}
+
+.footer-heading{
+  margin-bottom:17px;
+  color:rgba(255,255,255,.5);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+.footer-links{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.footer-links a{
+  color:rgba(255,255,255,.82);
+  font-size:12px;
+}
+
+.footer-links a:hover{
+  color:#fff;
+}
+
+.footer-bottom{
+  margin-top:55px;
+  padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.14);
+  display:flex;
+  justify-content:space-between;
+  gap:25px;
+  color:rgba(255,255,255,.4);
+  font-size:9px;
+}
+
+/* =========================
+   MOBILE ACTIONS
+========================= */
+
+.mobile-actions{
+  display:none;
+}
+
+/* =========================
+   REVEAL ANIMATIONS
+========================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:
+    opacity .75s var(--ease),
+    transform .75s var(--ease);
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+.stagger > *{
+  opacity:0;
+  transform:translateY(18px);
+}
+
+.stagger.visible > *{
+  animation:staggerIn .7s var(--ease) forwards;
+}
+
+.stagger.visible > *:nth-child(1){animation-delay:.04s}
+.stagger.visible > *:nth-child(2){animation-delay:.10s}
+.stagger.visible > *:nth-child(3){animation-delay:.16s}
+.stagger.visible > *:nth-child(4){animation-delay:.22s}
+.stagger.visible > *:nth-child(5){animation-delay:.28s}
+.stagger.visible > *:nth-child(6){animation-delay:.34s}
+.stagger.visible > *:nth-child(7){animation-delay:.40s}
+.stagger.visible > *:nth-child(8){animation-delay:.46s}
+
+@keyframes staggerIn{
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+  .desktop-nav{
+    display:none;
+  }
+
+  .menu-toggle{
+    display:flex;
+  }
+
+  .language-switcher{
+    margin-left:auto;
+  }
+
+  .hero-grid,
+  .contact-layout,
+  .about-block{
+    grid-template-columns:1fr;
+  }
+
+  .hero-visual{
+    min-height:420px;
+  }
+
+  .grid-4,
+  .trust-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stat:nth-child(2){
+    border-right:0;
+  }
+
+  .stat:nth-child(-n+2){
+    border-bottom:1px solid var(--ln);
+  }
+
+  .footer-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+
+  .container,
+  .nav-inner{
+    width:min(100% - 32px,var(--max));
+  }
+
+  .section{
+    padding:75px 0;
+  }
+
+  .section-sm{
+    padding:55px 0;
+  }
+
+  .hero{
+    padding:65px 0 70px;
+  }
+
+  h1{
+    font-size:46px;
+  }
+
+  h2{
+    font-size:39px;
+  }
+
+  .lead{
+    font-size:16px;
+  }
+
+  .hero-visual{
+    min-height:380px;
+  }
+
+  .document{
+    min-height:390px;
+    padding:30px;
+  }
+
+  .doc-title{
+    margin-top:30px;
+    font-size:25px;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .guide-list{
+    grid-template-columns:1fr;
+  }
+
+  .trust-grid{
+    grid-template-columns:1fr;
+  }
+
+  .trust-item{
+    margin-right:0;
+    padding-right:0;
+    padding-bottom:25px;
+    border-right:0;
+    border-bottom:1px solid rgba(255,255,255,.18);
+  }
+
+  .trust-item:last-child{
+    border-bottom:0;
+  }
+
+  .guide-item:nth-child(odd){
+    margin-right:0;
+  }
+
+  .guide-item:nth-child(even){
+    padding-left:0;
+    border-left:0;
+  }
+
+  .form-row{
+    grid-template-columns:1fr;
+  }
+
+  .form{
+    padding:24px;
+  }
+
+  .price-row{
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+
+  .price-row span{
+    text-align:left;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:35px 20px;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+  }
+
+  .mobile-actions{
+    position:fixed;
+    z-index:800;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(38,8,18,.97);
+    border-top:1px solid rgba(255,255,255,.15);
+  }
+
+  .mobile-actions a{
+    padding:14px 8px;
+    color:#fff;
+    text-align:center;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+
+  .mobile-actions a:first-child{
+    border-right:1px solid rgba(255,255,255,.15);
+  }
+
+  footer{
+    padding-bottom:85px;
+  }
+}
+
+@media(max-width:430px){
+
+  .language-switcher{
+    gap:1px;
+    padding:2px;
+  }
+
+  .language-switcher button{
+    padding:7px 5px;
+    font-size:8px;
+  }
+
+  .brand-text strong{
+    font-size:17px;
+  }
+
+  .brand-mark{
+    width:34px;
+    height:34px;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .stat{
+    border-right:0;
+    border-bottom:1px solid var(--ln);
+  }
+
+  .stat:last-child{
+    border-bottom:0;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+
+  .reveal,
+  .stagger > *{
+    opacity:1!important;
+    transform:none!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="progress"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="nav-inner">
+
+    <a href="#/" class="brand" data-route>
+      <span class="brand-mark">J</span>
+      <span class="brand-text">
+        <strong>Jarmund&Co</strong>
+        <small>LAHTI</small>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" id="desktopNav"></nav>
+
+    <!-- LANGUAGE SWITCHER -->
+    <div class="language-switcher" id="languageSwitcher" aria-label="Language selector">
+      <button type="button" data-lang="fi">FI</button>
+      <button type="button" data-lang="ru">RU</button>
+      <button type="button" data-lang="sv">SV</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Menu"
+      aria-expanded="false"
+      type="button"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <nav class="mobile-nav" id="mobileNav"></nav>
+
+    <div class="mobile-language">
+      <div class="mobile-language-label" id="mobileLanguageLabel"></div>
+
+      <div class="language-switcher" id="mobileLanguageSwitcher">
+        <button type="button" data-lang="fi">FI</button>
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="sv">SV</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="mobile-actions">
+  <a href="tel:+358441234567" id="mobileCall"></a>
+  <a href="#/yhteys" data-route id="mobileContact"></a>
+</div>
+
+<footer id="footer"></footer>
+
+<script>
+/* =========================================================
+   DATA
+========================================================= */
+
+const DATA = {
+
+fi:{
+  meta:{
+    title:"Jarmund&Co – Asianajotoimisto Lahti",
+    description:"Juridista apua Lahdessa – selkeästi, luottamuksellisesti ja kirjallisesti."
+  },
+
+  nav:{
+    services:"Palvelut",
+    pricing:"Hinnasto",
+    guides:"Oppaat",
+    about:"Meistä",
+    contact:"Yhteys",
+    why:"Miksi me"
+  },
+
+  ui:{
+    language:"Kieli",
+    menu:"Valikko",
+    call:"Soita",
+    contact:"Ota yhteyttä",
+    more:"Lue lisää",
+    back:"Takaisin",
+    send:"Lähetä viesti",
+    name:"Nimi",
+    email:"Sähköposti",
+    phone:"Puhelin",
+    subject:"Aihe",
+    message:"Kuvaile tilannettasi",
+    service:"Palvelu",
+    close:"Sulje",
+    sample:"Esimerkkisisältö – ei todellinen asiakasarvostelu",
+    prototype:"Prototyyppisisältö — tarkista yhteystiedot, hinnat, henkilötiedot ja lakisisältö ennen julkaisua.",
+    emailNote:"Lomake avaa sähköpostiohjelmasi; sivustolla ei ole tässä prototyypissä palvelinpuolen lomakekäsittelyä."
+  },
+
+  home:{
+    eyebrow:"Asianajotoimisto Lahdessa",
+    title:"Juridista apua selkeästi, kun sitä eniten tarvitset.",
+    text:"Kerro tilanteestasi omin sanoin. Autamme selvittämään seuraavat askeleet.",
+    primary:"Ota yhteyttä",
+    secondary:"Tutustu palveluihin",
+    note:"Ensimmäinen yhteydenotto ilman sitoumusta.",
+
+    stats:[
+      ["7","Oikeudenalat",""],
+      ["4","Palvelukielet",""],
+      ["100%","Kustannusarvio kirjallisesti",""],
+      ["24 h","Reagointi kiireellisissä asioissa","Tavoite, ei sitova lupaus."]
+    ],
+
+    servicesEyebrow:"Palvelut",
+    servicesTitle:"Apua käytännön oikeudellisiin tilanteisiin.",
+    servicesText:"Palvelumme kattavat rikos-, riita-, perhe-, työ-, maahanmuutto- ja yritysjuridiikan.",
+
+    howEyebrow:"Miten toimimme",
+    howTitle:"Selkeä prosessi alusta loppuun.",
+
+    steps:[
+      ["01","Ota yhteyttä","Kerro tilanteestasi puhelimitse, sähköpostilla tai lomakkeella."],
+      ["02","Arvioimme tilanteen ja kustannukset","Selvitämme asian laajuuden ja kerromme kustannusperusteista etukäteen."],
+      ["03","Sovimme toimeksiannosta kirjallisesti","Toimeksiannon sisältö, hinnoittelu ja vastuut sovitaan selkeästi."],
+      ["04","Hoidamme asian ja raportoimme","Pidämme sinut ajan tasalla asian etenemisestä."]
+    ],
+
+    trustEyebrow:"Luottamus",
+    trustTitle:"Oikeudellinen apu ilman turhaa vaikeaselkoisuutta.",
+
+    trust:[
+      ["Selkeä kieli","Selitämme oikeudelliset kysymykset ymmärrettävästi ilman tarpeetonta juridista jargonia."],
+      ["Kolme kieltä ja englanti","Palvelemme suomeksi, ruotsiksi, venäjäksi ja englanniksi."],
+      ["Läpinäkyvä hinnoittelu","Saat kirjallisen kustannusarvion ennen työn aloittamista soveltuvin osin."],
+      ["Maksuton alkukonsultaatio","Ensimmäinen keskustelu on maksuton, jos toimeksiantoa ei synny."]
+    ],
+
+    situationsEyebrow:"Tyypillisiä tilanteita",
+    situationsTitle:"Kun tarvitset juristin apua.",
+
+    situations:[
+      "Poliisi kutsui kuulusteluun",
+      "Sait kielteisen Migri-päätöksen",
+      "Avioero tai perinnönjako",
+      "Työnantaja irtisanoi",
+      "Riita sopimuksesta tai maksusta",
+      "Olet perustamassa yritystä"
+    ],
+
+    mistakesTitle:"Yleisiä virheitä",
+    mistakes:[
+      "Asian kanssa odotetaan liian pitkään.",
+      "Asiakirja allekirjoitetaan ymmärtämättä sen sisältöä.",
+      "Lausunto annetaan ennen oikeudellista neuvontaa.",
+      "Määräaika unohtuu.",
+      "Tärkeät asiakirjat eivät ole tallessa."
+    ],
+
+    sampleEyebrow:"Asiakaspalaute",
+    sampleTitle:"Esimerkkisisältö",
+    samples:[
+      ["“Selkeä ja rauhallinen tapa käydä asia läpi.”","Esimerkkiteksti – ei todellinen asiakasarvostelu"],
+      ["“Saimme nopeasti käsityksen siitä, mitä seuraavaksi kannattaa tehdä.”","Esimerkkiteksti – ei todellinen asiakasarvostelu"],
+      ["“Hinnoittelu ja prosessi käytiin läpi ymmärrettävästi.”","Esimerkkiteksti – ei todellinen asiakasarvostelu"]
+    ]
+  },
+
+  services:[
+    ["rikos","01","Rikosoikeus","Avustaminen rikosasioissa, kuulusteluissa ja oikeudenkäynneissä.","250–350 €/h"],
+    ["riita","02","Riita-asiat","Sopimusriidat, vahingonkorvaukset ja muut yksityisoikeudelliset riidat.","250–350 €/h"],
+    ["perhe","03","Perhe- ja perintöoikeus","Avioero, lasten asiat, testamentit ja perheoikeudelliset kysymykset.","1 500–5 000 € / avioero"],
+    ["perinto","04","Perinnönjako ja kuolinpesä","Kuolinpesän selvitys, perinnönjako ja siihen liittyvät riidat.","750–1 500 €"],
+    ["tyo","05","Työoikeus","Työsopimukset, irtisanomiset, palkkariidat ja työnantajan velvollisuudet.","230–300 €/h"],
+    ["migri","06","Maahanmuutto-oikeus","Oleskeluluvat, valitukset ja muut maahanmuuttoon liittyvät asiat.","1 200–3 000 € / valitus"],
+    ["yritys","07","Yritysjuridiikka","Yrityksen perustaminen, sopimukset ja jatkuva juridinen neuvonta.","250–400 €/h"]
+  ],
+
+  guides:[
+    ["perinnonjako","Perinnönjako askel askeleelta"],
+    ["poliisi","Poliisi kutsui kuulusteluun"],
+    ["migri","Kielteinen Migri-päätös"],
+    ["avioero","Avioero Suomessa"],
+    ["tyo","Työnantaja irtisanoi"]
+  ],
+
+  team:[
+    ["A. Jarmund","Varatuomari, OTM","Rikos- ja riita-asiat","jarmund.jpg"],
+    ["M. Virtanen","Varatuomari, OTM","Perhe- ja työoikeus","virtanen.jpg"],
+    ["S. Lindholm","OTM","Maahanmuutto ja yritykset","lindholm.jpg"]
+  ],
+
+  pricing:{
+    eyebrow:"Hinnasto",
+    title:"Selkeä hinnoittelu ennen työn aloittamista.",
+    intro:"Lopullinen kustannus riippuu asian laajuudesta, kiireellisyydestä ja tarvittavista toimenpiteistä.",
+    rows:[
+      ["Alkukonsultaatio","Maksuton"],
+      ["Tuntiveloitus","250–350 €/h + ALV"],
+      ["Kiinteä hinta","Sovitaan kirjallisesti"],
+      ["Oikeusapu","Mahdollinen edellytysten täyttyessä"],
+      ["Oikeusturvavakuutus","Voidaan selvittää asian yhteydessä"]
+    ],
+    note:"Hinnat ovat esimerkkihintoja prototyyppiä varten."
+  },
+
+  about:{
+    eyebrow:"Meistä",
+    title:"Juridinen asiantuntemus, joka alkaa tilanteesi ymmärtämisestä.",
+    text1:"Jarmund&Co on Lahti-keskeinen oikeudellisen palvelun prototyyppi. Tavoitteena on yhdistää perinteisen asianajotoimiston rauhallinen ilme, selkeä viestintä ja käytännönläheinen asioiden hoitaminen.",
+    text2:"Asiakkaan ei pitäisi joutua tuntemaan lakia ennen kuin hän voi pyytää oikeudellista apua. Meidän tehtävämme on auttaa hahmottamaan vaihtoehdot, määräajat, riskit ja seuraavat askeleet.",
+    quote:"“Hyvä juridinen neuvonta tekee monimutkaisesta tilanteesta hallittavan.”",
+    valuesEyebrow:"Periaatteemme",
+    values:[
+      ["Selkeys","Asiat ilmaistaan ymmärrettävästi."],
+      ["Luottamuksellisuus","Asiakkaan asia käsitellään asianmukaisesti ja luottamuksellisesti."],
+      ["Ennakoitavuus","Kustannuksista ja prosessista kerrotaan mahdollisimman aikaisin."],
+      ["Vastuullisuus","Emme lupaa lopputulosta, jota emme voi hallita."]
+    ]
+  },
+
+  faq:[
+    ["Tarvitsenko juristin?","Se riippuu tilanteesta. Jos asiassa on merkittävä taloudellinen, rikosoikeudellinen tai määräaikaan liittyvä riski, oikeudellinen arvio voi olla hyödyllinen."],
+    ["Paljonko palvelu maksaa?","Tavallinen tuntiveloitus on prototyypissä 250–350 €/h. Joissakin asioissa voidaan sopia kiinteästä hinnasta."],
+    ["Voinko asioida venäjäksi?","Kyllä. Palvelukieliksi on määritelty suomi, ruotsi, venäjä ja englanti."],
+    ["Voiko tapaaminen olla etänä?","Kyllä. Etätapaaminen voidaan järjestää sovittaessa."],
+    ["Määräaika on huomenna. Voitteko auttaa?","Kiireellisissä asioissa otamme yhteyttä mahdollisimman nopeasti. 24 tuntia on tavoite, ei sitova lupaus."]
+  ],
+
+  contact:{
+    eyebrow:"Yhteys",
+    title:"Kerro tilanteestasi.",
+    text:"Ensimmäinen yhteydenotto voi olla lyhyt. Kerro mitä on tapahtunut, mikä määräaika mahdollisesti koskee asiaa ja mitä tarvitset.",
+    address:"Pataljoonankatu 10",
+    city:"15550 Lahti",
+    email:"info@jarmundco.fi",
+    phone:" +358 44 123 4567",
+    company:"Y-tunnus 0000000-0"
+  },
+
+  footer:{
+    description:"Juridista apua Lahdessa – selkeästi, luottamuksellisesti ja käytännönläheisesti.",
+    navigation:"Navigointi",
+    contact:"Yhteystiedot",
+    notice:"Prototyyppisisältö — tarkista yhteystiedot, hinnat, henkilötiedot ja lakisisältö ennen julkaisua.",
+    rights:"© Jarmund&Co – Lahti"
+  }
+},
+
+ru:{
+  meta:{
+    title:"Jarmund&Co – Юридическая фирма в Лахти",
+    description:"Юридическая помощь в Лахти — понятно, конфиденциально и прозрачно."
+  },
+
+  nav:{
+    services:"Услуги",
+    pricing:"Цены",
+    guides:"Гайды",
+    about:"О компании",
+    contact:"Контакты",
+    why:"Почему мы"
+  },
+
+  ui:{
+    language:"Язык",
+    menu:"Меню",
+    call:"Позвонить",
+    contact:"Связаться",
+    more:"Подробнее",
+    back:"Назад",
+    send:"Отправить сообщение",
+    name:"Имя",
+    email:"Электронная почта",
+    phone:"Телефон",
+    subject:"Тема",
+    message:"Опишите ситуацию",
+    service:"Услуга",
+    close:"Закрыть",
+    sample:"Демонстрационный текст — не настоящий отзыв клиента",
+    prototype:"Демонстрационный контент — перед публикацией проверьте контакты, цены, данные специалистов и юридическую информацию.",
+    emailNote:"Форма открывает почтовое приложение; серверной обработки формы в этом прототипе нет."
+  },
+
+  home:{
+    eyebrow:"Юридическая фирма в Лахти",
+    title:"Понятная юридическая помощь тогда, когда она нужна больше всего.",
+    text:"Расскажите о ситуации своими словами. Мы поможем определить следующие шаги.",
+    primary:"Связаться с нами",
+    secondary:"Услуги",
+    note:"Первичное обращение без обязательств.",
+
+    stats:[
+      ["7","Областей права",""],
+      ["4","Языка обслуживания",""],
+      ["100%","Письменная оценка стоимости",""],
+      ["24 ч","Реакция на срочные обращения","Целевой показатель, не обязательство."]
+    ],
+
+    servicesEyebrow:"Услуги",
+    servicesTitle:"Помощь в практических юридических ситуациях.",
+    servicesText:"Услуги включают уголовное, гражданское, семейное, трудовое, миграционное и корпоративное право.",
+
+    howEyebrow:"Как мы работаем",
+    howTitle:"Понятный процесс от начала до конца.",
+
+    steps:[
+      ["01","Свяжитесь с нами","Расскажите о ситуации по телефону, электронной почте или через форму."],
+      ["02","Оцениваем ситуацию и стоимость","Определяем объём работы и заранее объясняем принципы формирования стоимости."],
+      ["03","Письменно согласуем поручение","Содержание поручения, стоимость и ответственность фиксируются понятно."],
+      ["04","Ведём дело и информируем вас","Вы получаете информацию о ходе работы."]
+    ],
+
+    trustEyebrow:"Доверие",
+    trustTitle:"Юридическая помощь без ненужной сложности.",
+
+    trust:[
+      ["Понятный язык","Объясняем юридические вопросы простым языком без ненужного юридического жаргона."],
+      ["Три языка и английский","Обслуживание на финском, шведском, русском и английском."],
+      ["Прозрачное ценообразование","По возможности письменная оценка стоимости до начала работы."],
+      ["Бесплатная первичная консультация","Первый разговор бесплатен, если поручение не возникает."]
+    ],
+
+    situationsEyebrow:"Типичные ситуации",
+    situationsTitle:"Когда может понадобиться юрист.",
+
+    situations:[
+      "Вас вызвали в полицию на допрос",
+      "Вы получили отрицательное решение Migri",
+      "Развод или раздел наследства",
+      "Работодатель вас уволил",
+      "Спор по договору или оплате",
+      "Вы открываете компанию"
+    ],
+
+    mistakesTitle:"Распространённые ошибки",
+    mistakes:[
+      "Слишком долго ждать с обращением за помощью.",
+      "Подписывать документ, не понимая его содержания.",
+      "Давать объяснения до получения юридической консультации.",
+      "Пропустить установленный срок.",
+      "Не сохранять важные документы."
+    ],
+
+    sampleEyebrow:"Отзывы клиентов",
+    sampleTitle:"Демонстрационный контент",
+    samples:[
+      ["«Понятно и спокойно объяснили ситуацию.»","Пример текста — не настоящий отзыв клиента"],
+      ["«Мы быстро поняли, какие шаги нужно предпринять дальше.»","Пример текста — не настоящий отзыв клиента"],
+      ["«Стоимость и процесс объяснили очень понятно.»","Пример текста — не настоящий отзыв клиента"]
+    ]
+  },
+
+  services:[
+    ["rikos","01","Уголовное право","Помощь в уголовных делах, на допросах и в судебных процессах.","250–350 €/ч"],
+    ["riita","02","Гражданские споры","Договорные споры, возмещение ущерба и другие гражданско-правовые споры.","250–350 €/ч"],
+    ["perhe","03","Семейное и наследственное право","Развод, вопросы детей, завещания и другие семейно-правовые вопросы.","1 500–5 000 € / развод"],
+    ["perinto","04","Раздел наследства","Наследственное имущество, раздел наследства и связанные споры.","750–1 500 €"],
+    ["tyo","05","Трудовое право","Трудовые договоры, увольнения, споры по зарплате и обязанности работодателя.","230–300 €/ч"],
+    ["migri","06","Миграционное право","Виды на жительство, апелляции и другие миграционные вопросы.","1 200–3 000 € / апелляция"],
+    ["yritys","07","Корпоративное право","Создание компании, договоры и постоянное юридическое сопровождение.","250–400 €/ч"]
+  ],
+
+  guides:[
+    ["perinnonjako","Раздел наследства шаг за шагом"],
+    ["poliisi","Вас вызвали в полицию на допрос"],
+    ["migri","Отрицательное решение Migri"],
+    ["avioero","Развод в Финляндии"],
+    ["tyo","Работодатель вас уволил"]
+  ],
+
+  team:[
+    ["A. Jarmund","Varatuomari, OTM","Уголовные и гражданские дела","jarmund.jpg"],
+    ["M. Virtanen","Varatuomari, OTM","Семейное и трудовое право","virtanen.jpg"],
+    ["S. Lindholm","OTM","Миграция и бизнес","lindholm.jpg"]
+  ],
+
+  pricing:{
+    eyebrow:"Цены",
+    title:"Понятное ценообразование до начала работы.",
+    intro:"Итоговая стоимость зависит от объёма дела, срочности и необходимых действий.",
+    rows:[
+      ["Первичная консультация","Бесплатно"],
+      ["Почасовая оплата","250–350 €/ч + НДС"],
+      ["Фиксированная цена","Согласуется письменно"],
+      ["Юридическая помощь","Возможна при выполнении условий"],
+      ["Страховка правовой защиты","Можно проверить в рамках дела"]
+    ],
+    note:"Цены являются демонстрационными для прототипа."
+  },
+
+  about:{
+    eyebrow:"О компании",
+    title:"Юридическая экспертиза начинается с понимания вашей ситуации.",
+    text1:"Jarmund&Co — прототип юридической фирмы, ориентированной на Лахти. Цель — объединить спокойную эстетику традиционной юридической фирмы, понятную коммуникацию и практический подход.",
+    text2:"Клиенту не нужно знать закон до обращения за юридической помощью. Наша задача — помочь понять варианты, сроки, риски и следующие шаги.",
+    quote:"«Хорошая юридическая консультация превращает сложную ситуацию в управляемую.»",
+    valuesEyebrow:"Наши принципы",
+    values:[
+      ["Понятность","Информация объясняется доступным языком."],
+      ["Конфиденциальность","Дело клиента рассматривается надлежащим образом и конфиденциально."],
+      ["Предсказуемость","О процессе и расходах сообщается как можно раньше."],
+      ["Ответственность","Мы не обещаем результат, который не можем контролировать."]
+    ]
+  },
+
+  faq:[
+    ["Нужен ли мне юрист?","Это зависит от ситуации. Если присутствует значительный финансовый, уголовно-правовой или процессуальный риск, юридическая оценка может быть полезной."],
+    ["Сколько стоит услуга?","В прототипе обычная почасовая ставка составляет 250–350 €/ч. В некоторых делах можно согласовать фиксированную цену."],
+    ["Можно ли общаться на русском?","Да. Языки обслуживания: финский, шведский, русский и английский."],
+    ["Можно провести встречу удалённо?","Да. При согласовании можно организовать удалённую встречу."],
+    ["Срок истекает завтра. Вы можете помочь?","В срочных делах мы стараемся связаться как можно быстрее. 24 часа — целевой показатель, а не обязательство."]
+  ],
+
+  contact:{
+    eyebrow:"Контакты",
+    title:"Расскажите о своей ситуации.",
+    text:"Первичное сообщение может быть коротким. Расскажите, что произошло, есть ли срок и какая помощь вам нужна.",
+    address:"Pataljoonankatu 10",
+    city:"15550 Lahti",
+    email:"info@jarmundco.fi",
+    phone:"+358 44 123 4567",
+    company:"Y-tunnus 0000000-0"
+  },
+
+  footer:{
+    description:"Юридическая помощь в Лахти — понятно, конфиденциально и практично.",
+    navigation:"Навигация",
+    contact:"Контакты",
+    notice:"Демонстрационный контент — перед публикацией проверьте контакты, цены, данные специалистов и юридическую информацию.",
+    rights:"© Jarmund&Co – Lahti"
+  }
+},
+
+sv:{
+  meta:{
+    title:"Jarmund&Co – Juridisk byrå i Lahtis",
+    description:"Juridisk hjälp i Lahtis – tydligt, konfidentiellt och transparent."
+  },
+
+  nav:{
+    services:"Tjänster",
+    pricing:"Priser",
+    guides:"Guider",
+    about:"Om oss",
+    contact:"Kontakt",
+    why:"Varför oss"
+  },
+
+  ui:{
+    language:"Språk",
+    menu:"Meny",
+    call:"Ring",
+    contact:"Kontakta oss",
+    more:"Läs mer",
+    back:"Tillbaka",
+    send:"Skicka meddelande",
+    name:"Namn",
+    email:"E-post",
+    phone:"Telefon",
+    subject:"Ämne",
+    message:"Beskriv din situation",
+    service:"Tjänst",
+    close:"Stäng",
+    sample:"Exempeltext – inte ett verkligt klientomdöme",
+    prototype:"Prototypinnehåll — kontrollera kontaktuppgifter, priser, personuppgifter och juridiskt innehåll före publicering.",
+    emailNote:"Formuläret öppnar ditt e-postprogram; detta prototyp har ingen serverbaserad formulärhantering."
+  },
+
+  home:{
+    eyebrow:"Juridisk byrå i Lahtis",
+    title:"Juridisk hjälp på ett tydligt sätt, när du behöver den som mest.",
+    text:"Berätta om din situation med egna ord. Vi hjälper dig att reda ut nästa steg.",
+    primary:"Kontakta oss",
+    secondary:"Se våra tjänster",
+    note:"Första kontakten utan förpliktelser.",
+
+    stats:[
+      ["7","Rättsområden",""],
+      ["4","Servicespråk",""],
+      ["100%","Skriftlig kostnadsbedömning",""],
+      ["24 h","Respons vid brådskande ärenden","Målsättning, inte ett bindande löfte."]
+    ],
+
+    servicesEyebrow:"Tjänster",
+    servicesTitle:"Hjälp i praktiska juridiska situationer.",
+    servicesText:"Våra tjänster omfattar straffrätt, tvistemål, familje-, arbets-, migrations- och företagsjuridik.",
+
+    howEyebrow:"Så arbetar vi",
+    howTitle:"En tydlig process från början till slut.",
+
+    steps:[
+      ["01","Kontakta oss","Berätta om din situation per telefon, e-post eller via formuläret."],
+      ["02","Vi bedömer situationen och kostnaderna","Vi bedömer omfattningen och förklarar kostnadsgrunderna i förväg."],
+      ["03","Vi avtalar uppdraget skriftligen","Uppdragets innehåll, pris och ansvar dokumenteras tydligt."],
+      ["04","Vi hanterar ärendet och rapporterar","Vi håller dig informerad om hur ärendet går vidare."]
+    ],
+
+    trustEyebrow:"Förtroende",
+    trustTitle:"Juridisk hjälp utan onödig komplexitet.",
+
+    trust:[
+      ["Tydligt språk","Vi förklarar juridiska frågor utan onödigt juridiskt fackspråk."],
+      ["Tre språk och engelska","Vi betjänar på finska, svenska, ryska och engelska."],
+      ["Transparent prissättning","Du får i tillämpliga fall en skriftlig kostnadsbedömning före arbetet."],
+      ["Kostnadsfri första konsultation","Det första samtalet är kostnadsfritt om inget uppdrag uppstår."]
+    ],
+
+    situationsEyebrow:"Typiska situationer",
+    situationsTitle:"När du behöver juridisk hjälp.",
+
+    situations:[
+      "Polisen kallade dig till förhör",
+      "Du fick ett negativt Migri-beslut",
+      "Skilsmässa eller arvskifte",
+      "Arbetsgivaren sade upp dig",
+      "Tvist om avtal eller betalning",
+      "Du startar ett företag"
+    ],
+
+    mistakesTitle:"Vanliga misstag",
+    mistakes:[
+      "Att vänta för länge med att söka hjälp.",
+      "Att skriva under utan att förstå innehållet.",
+      "Att lämna uppgifter innan juridisk rådgivning.",
+      "Att missa en tidsfrist.",
+      "Att inte spara viktiga dokument."
+    ],
+
+    sampleEyebrow:"Klientomdömen",
+    sampleTitle:"Exempelinnehåll",
+    samples:[
+      ["“Ett tydligt och lugnt sätt att gå igenom situationen.”","Exempeltext – inte ett verkligt klientomdöme"],
+      ["“Vi fick snabbt en bild av vad nästa steg borde vara.”","Exempeltext – inte ett verkligt klientomdöme"],
+      ["“Prissättning och process förklarades på ett begripligt sätt.”","Exempeltext – inte ett verkligt klientomdöme"]
+    ]
+  },
+
+  services:[
+    ["rikos","01","Straffrätt","Biträde i brottmål, förhör och domstolsprocesser.","250–350 €/h"],
+    ["riita","02","Tvistemål","Avtalstvister, skadestånd och andra civilrättsliga tvister.","250–350 €/h"],
+    ["perhe","03","Familje- och arvsrätt","Skilsmässa, barnfrågor, testamenten och familjerättsliga frågor.","1 500–5 000 € / skilsmässa"],
+    ["perinto","04","Arvskifte och dödsbo","Utredning av dödsbo, arvskifte och relaterade tvister.","750–1 500 €"],
+    ["tyo","05","Arbetsrätt","Anställningsavtal, uppsägningar, lönetvister och arbetsgivarens skyldigheter.","230–300 €/h"],
+    ["migri","06","Migrationsrätt","Uppehållstillstånd, överklaganden och andra migrationsärenden.","1 200–3 000 € / överklagande"],
+    ["yritys","07","Företagsjuridik","Företagsbildning, avtal och löpande juridisk rådgivning.","250–400 €/h"]
+  ],
+
+  guides:[
+    ["perinnonjako","Arvskifte steg för steg"],
+    ["poliisi","Polisen kallade dig till förhör"],
+    ["migri","Avslag från Migri"],
+    ["avioero","Skilsmässa i Finland"],
+    ["tyo","Arbetsgivaren sade upp dig"]
+  ],
+
+  team:[
+    ["A. Jarmund","Varatuomari, OTM","Brott och tvister","jarmund.jpg"],
+    ["M. Virtanen","Varatuomari, OTM","Familje- och arbetsrätt","virtanen.jpg"],
+    ["S. Lindholm","OTM","Migration och företag","lindholm.jpg"]
+  ],
+
+  pricing:{
+    eyebrow:"Priser",
+    title:"Tydlig prissättning före arbetet börjar.",
+    intro:"Den slutliga kostnaden beror på ärendets omfattning, brådskande karaktär och vilka åtgärder som behövs.",
+    rows:[
+      ["Första konsultation","Kostnadsfri"],
+      ["Timdebitering","250–350 €/h + moms"],
+      ["Fast pris","Avtalas skriftligen"],
+      ["Rättshjälp","Möjlig om villkoren uppfylls"],
+      ["Rättsskyddsförsäkring","Kan kontrolleras i samband med ärendet"]
+    ],
+    note:"Priserna är exempelpriser för prototypen."
+  },
+
+  about:{
+    eyebrow:"Om oss",
+    title:"Juridisk expertis börjar med att förstå din situation.",
+    text1:"Jarmund&Co är en prototyp för en juridisk byrå med fokus på Lahtis. Målet är att kombinera en traditionell juridisk byrås lugna uttryck med tydlig kommunikation och ett praktiskt arbetssätt.",
+    text2:"Klienten ska inte behöva kunna lagen innan juridisk hjälp kan sökas. Vår uppgift är att hjälpa dig förstå alternativ, tidsfrister, risker och nästa steg.",
+    quote:"“God juridisk rådgivning gör en komplicerad situation hanterbar.”",
+    valuesEyebrow:"Våra principer",
+    values:[
+      ["Tydlighet","Informationen förklaras på ett begripligt sätt."],
+      ["Konfidentialitet","Klientens ärende hanteras korrekt och konfidentiellt."],
+      ["Förutsebarhet","Process och kostnader kommuniceras så tidigt som möjligt."],
+      ["Ansvar","Vi lovar inte ett resultat som vi inte kan kontrollera."]
+    ]
+  },
+
+  faq:[
+    ["Behöver jag en jurist?","Det beror på situationen. Om det finns en betydande ekonomisk, straffrättslig eller tidsmässig risk kan en juridisk bedömning vara värdefull."],
+    ["Vad kostar tjänsten?","Den vanliga timdebiteringen i prototypen är 250–350 €/h. I vissa ärenden kan ett fast pris avtalas."],
+    ["Kan jag få service på ryska?","Ja. Servicespråken är finska, svenska, ryska och engelska."],
+    ["Kan mötet hållas på distans?","Ja. Ett distansmöte kan ordnas efter överenskommelse."],
+    ["Tidsfristen går ut i morgon. Kan ni hjälpa?","Vid brådskande ärenden försöker vi kontakta dig så snabbt som möjligt. 24 timmar är en målsättning, inte ett bindande löfte."]
+  ],
+
+  contact:{
+    eyebrow:"Kontakt",
+    title:"Berätta om din situation.",
+    text:"Det första meddelandet kan vara kort. Berätta vad som har hänt, om det finns en tidsfrist och vilken hjälp du behöver.",
+    address:"Pataljoonankatu 10",
+    city:"15550 Lahti",
+    email:"info@jarmundco.fi",
+    phone:"+358 44 123 4567",
+    company:"Y-tunnus 0000000-0"
+  },
+
+  footer:{
+    description:"Juridisk hjälp i Lahtis – tydligt, konfidentiellt och praktiskt.",
+    navigation:"Navigering",
+    contact:"Kontaktuppgifter",
+    notice:"Prototypinnehåll — kontrollera kontaktuppgifter, priser, personuppgifter och juridiskt innehåll före publicering.",
+    rights:"© Jarmund&Co – Lahti"
+  }
+},
+
+en:{
+  meta:{
+    title:"Jarmund&Co – Law Firm in Lahti",
+    description:"Clear legal guidance in Lahti — confidential, transparent and practical."
+  },
+
+  nav:{
+    services:"Services",
+    pricing:"Pricing",
+    guides:"Guides",
+    about:"About us",
+    contact:"Contact",
+    why:"Why us"
+  },
+
+  ui:{
+    language:"Language",
+    menu:"Menu",
+    call:"Call",
+    contact:"Contact us",
+    more:"Read more",
+    back:"Back",
+    send:"Send message",
+    name:"Name",
+    email:"Email",
+    phone:"Phone",
+    subject:"Subject",
+    message:"Describe your situation",
+    service:"Service",
+    close:"Close",
+    sample:"Sample copy – not a real client review",
+    prototype:"Prototype content — verify contact details, prices, personal information and legal content before publication.",
+    emailNote:"The form opens your email client; this prototype has no server-side form processing."
+  },
+
+  home:{
+    eyebrow:"Law firm in Lahti",
+    title:"Clear legal guidance when you need it most.",
+    text:"Tell us about your situation in your own words. We will help you identify the next steps.",
+    primary:"Contact us",
+    secondary:"Explore services",
+    note:"Initial contact without obligation.",
+
+    stats:[
+      ["7","Areas of law",""],
+      ["4","Service languages",""],
+      ["100%","Written cost estimate",""],
+      ["24 h","Urgent response target","Target, not a binding promise."]
+    ],
+
+    servicesEyebrow:"Services",
+    servicesTitle:"Practical help for real legal situations.",
+    servicesText:"Our services cover criminal, civil, family, employment, immigration and corporate law.",
+
+    howEyebrow:"How we work",
+    howTitle:"A clear process from start to finish.",
+
+    steps:[
+      ["01","Get in touch","Tell us about your situation by phone, email or through the form."],
+      ["02","We assess the matter and costs","We assess the scope and explain the basis of the costs in advance."],
+      ["03","We agree on the engagement in writing","The scope, pricing and responsibilities are documented clearly."],
+      ["04","We handle the matter and keep you informed","We keep you updated as the matter progresses."]
+    ],
+
+    trustEyebrow:"Trust",
+    trustTitle:"Legal guidance without unnecessary complexity.",
+
+    trust:[
+      ["Clear language","We explain legal issues in understandable language without unnecessary jargon."],
+      ["Three languages and English","We provide service in Finnish, Swedish, Russian and English."],
+      ["Transparent pricing","Where applicable, you receive a written cost estimate before work begins."],
+      ["Free initial consultation","The first conversation is free if no engagement follows."]
+    ],
+
+    situationsEyebrow:"Typical situations",
+    situationsTitle:"When you may need legal assistance.",
+
+    situations:[
+      "The police called you for questioning",
+      "You received a negative Migri decision",
+      "Divorce or inheritance division",
+      "Your employer terminated your employment",
+      "A dispute over a contract or payment",
+      "You are starting a company"
+    ],
+
+    mistakesTitle:"Common mistakes",
+    mistakes:[
+      "Waiting too long before seeking advice.",
+      "Signing a document without understanding it.",
+      "Giving a statement before obtaining legal advice.",
+      "Missing a deadline.",
+      "Failing to keep important documents."
+    ],
+
+    sampleEyebrow:"Client feedback",
+    sampleTitle:"Sample content",
+    samples:[
+      ["“A clear and calm way of going through the situation.”","Sample copy – not a real client review"],
+      ["“We quickly understood what the next steps should be.”","Sample copy – not a real client review"],
+      ["“The pricing and process were explained clearly.”","Sample copy – not a real client review"]
+    ]
+  },
+
+  services:[
+    ["rikos","01","Criminal law","Assistance in criminal matters, police questioning and court proceedings.","€250–350/h"],
+    ["riita","02","Civil disputes","Contract disputes, damages claims and other civil-law disputes.","€250–350/h"],
+    ["perhe","03","Family & inheritance law","Divorce, child-related matters, wills and family-law questions.","€1,500–5,000 / divorce"],
+    ["perinto","04","Estate & inheritance division","Estate administration, inheritance division and related disputes.","€750–1,500"],
+    ["tyo","05","Employment law","Employment contracts, terminations, salary disputes and employer obligations.","€230–300/h"],
+    ["migri","06","Immigration law","Residence permits, appeals and other immigration matters.","€1,200–3,000 / appeal"],
+    ["yritys","07","Corporate law","Company formation, contracts and ongoing legal advice.","€250–400/h"]
+  ],
+
+  guides:[
+    ["perinnonjako","Estate division step by step"],
+    ["poliisi","Police called you for questioning"],
+    ["migri","Negative Migri decision"],
+    ["avioero","Divorce in Finland"],
+    ["tyo","Your employer terminated your employment"]
+  ],
+
+  team:[
+    ["A. Jarmund","Varatuomari, OTM","Criminal & civil matters","jarmund.jpg"],
+    ["M. Virtanen","Varatuomari, OTM","Family & employment law","virtanen.jpg"],
+    ["S. Lindholm","OTM","Immigration & corporate matters","lindholm.jpg"]
+  ],
+
+  pricing:{
+    eyebrow:"Pricing",
+    title:"Clear pricing before work begins.",
+    intro:"The final cost depends on the scope of the matter, urgency and required work.",
+    rows:[
+      ["Initial consultation","Free of charge"],
+      ["Hourly rate","€250–350/h + VAT"],
+      ["Fixed fee","Agreed in writing"],
+      ["Legal aid","Possible if eligibility requirements are met"],
+      ["Legal expenses insurance","Can be checked in connection with the matter"]
+    ],
+    note:"Prices are example prices for this prototype."
+  },
+
+  about:{
+    eyebrow:"About us",
+    title:"Legal expertise starts with understanding your situation.",
+    text1:"Jarmund&Co is a prototype for a Lahti-focused legal practice. The aim is to combine the calm character of a traditional law firm with clear communication and a practical approach.",
+    text2:"A client should not have to understand the law before asking for legal help. Our role is to help you understand your options, deadlines, risks and next steps.",
+    quote:"“Good legal advice turns a complicated situation into a manageable one.”",
+    valuesEyebrow:"Our principles",
+    values:[
+      ["Clarity","Information is explained in understandable terms."],
+      ["Confidentiality","Client matters are handled appropriately and confidentially."],
+      ["Predictability","Process and costs are communicated as early as possible."],
+      ["Responsibility","We do not promise outcomes we cannot control."]
+    ]
+  },
+
+  faq:[
+    ["Do I need a lawyer?","It depends on the situation. If there is a significant financial, criminal-law or deadline-related risk, a legal assessment may be useful."],
+    ["How much does the service cost?","The standard hourly rate in this prototype is €250–350/h. A fixed fee may be agreed for some matters."],
+    ["Can I communicate in Russian?","Yes. Service languages are Finnish, Swedish, Russian and English."],
+    ["Can the meeting be remote?","Yes. A remote meeting can be arranged by agreement."],
+    ["The deadline is tomorrow. Can you help?","For urgent matters we aim to respond as quickly as possible. 24 hours is a target, not a binding promise."]
+  ],
+
+  contact:{
+    eyebrow:"Contact",
+    title:"Tell us about your situation.",
+    text:"Your first message can be brief. Tell us what happened, whether there is a deadline and what kind of help you need.",
+    address:"Pataljoonankatu 10",
+    city:"15550 Lahti",
+    email:"info@jarmundco.fi",
+    phone:"+358 44 123 4567",
+    company:"Business ID 0000000-0"
+  },
+
+  footer:{
+    description:"Clear, confidential and practical legal assistance in Lahti.",
+    navigation:"Navigation",
+    contact:"Contact details",
+    notice:"Prototype content — verify contact details, prices, personal information and legal content before publication.",
+    rights:"© Jarmund&Co – Lahti"
+  }
+}
+
+};
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const LANGS=["fi","ru","sv","en"];
+
+const state={
+  lang:localStorage.getItem("jarmundLang") || "fi",
+  faqOpen:null
+};
+
+if(!LANGS.includes(state.lang)){
+  state.lang="fi";
+}
+
+function D(){
+  return DATA[state.lang];
+}
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+function updateLanguageSwitcher(){
+
+  document.querySelectorAll("[data-lang]").forEach(btn=>{
+    const active=btn.dataset.lang===state.lang;
+
+    btn.classList.toggle("active",active);
+    btn.setAttribute("aria-pressed",String(active));
+  });
+
+  const label=document.getElementById("mobileLanguageLabel");
+
+  if(label){
+    label.textContent=D().ui.language;
+  }
+}
+
+function setLanguage(lang){
+
+  if(!LANGS.includes(lang)) return;
+
+  state.lang=lang;
+
+  localStorage.setItem("jarmundLang",lang);
+
+  document.documentElement.lang=lang;
+
+  document.title=D().meta.title;
+
+  const description=document.querySelector('meta[name="description"]');
+
+  if(description){
+    description.content=D().meta.description;
+  }
+
+  closeMobileMenu();
+
+  render();
+
+  updateLanguageSwitcher();
+
+  window.scrollTo({
+    top:0,
+    behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "auto"
+      : "smooth"
+  });
+}
+
+document.addEventListener("click",e=>{
+
+  const langButton=e.target.closest("[data-lang]");
+
+  if(langButton){
+    e.preventDefault();
+    setLanguage(langButton.dataset.lang);
+  }
+
+});
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHtml(str){
+
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function route(){
+
+  const hash=location.hash || "#/";
+
+  return hash
+    .replace(/^#\/?/,"")
+    .split("/")
+    .filter(Boolean);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+function renderNavigation(){
+
+  const d=D();
+
+  const items=[
+    ["#/palvelut",d.nav.services],
+    ["#/hinnasto",d.nav.pricing],
+    ["#/oppaat",d.nav.guides],
+    ["#/miksi",d.nav.about],
+    ["#/yhteys",d.nav.contact]
+  ];
+
+  const current="#/"+(route()[0] || "");
+
+  const html=items.map(([href,label])=>{
+
+    const active=current===href;
+
+    return `
+      <a
+        href="${href}"
+        data-route
+        class="${active ? "active":""}"
+      >${escapeHtml(label)}</a>
+    `;
+
+  }).join("");
+
+  document.getElementById("desktopNav").innerHTML=html;
+  document.getElementById("mobileNav").innerHTML=html;
+
+  document.getElementById("mobileCall").textContent=d.ui.call;
+  document.getElementById("mobileContact").textContent=d.ui.contact;
+
+  updateLanguageSwitcher();
+}
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function renderHome(){
+
+  const d=D();
+  const h=d.home;
+
+  return `
+
+  <section class="hero">
+    <div class="container hero-grid">
+
+      <div class="hero-copy reveal">
+
+        <div class="eyebrow">${escapeHtml(h.eyebrow)}</div>
+
+        <h1>${escapeHtml(h.title)}</h1>
+
+        <p class="lead">${escapeHtml(h.text)}</p>
+
+        <div class="hero-actions">
+
+          <a class="btn btn-primary" href="#/yhteys" data-route>
+            ${escapeHtml(h.primary)}
+          </a>
+
+          <a class="btn btn-secondary" href="#/palvelut" data-route>
+            ${escapeHtml(h.secondary)}
+          </a>
+
+        </div>
+
+        <div class="hero-note">
+          ${escapeHtml(h.note)}
+        </div>
+
+      </div>
+
+      <div class="hero-visual reveal">
+
+        <div class="document">
+
+          <div class="doc-top">
+            <div class="doc-logo">Jarmund&Co</div>
+            <div class="doc-number">LAHTI / LEGAL</div>
+          </div>
+
+          <div class="doc-title">
+            ${state.lang==="fi"
+              ? "Juridinen arvio"
+              : state.lang==="ru"
+              ? "Юридическая оценка"
+              : state.lang==="sv"
+              ? "Juridisk bedömning"
+              : "Legal assessment"}
+          </div>
+
+          <div class="doc-lines">
+            <div class="doc-line"></div>
+            <div class="doc-line medium"></div>
+            <div class="doc-line"></div>
+            <div class="doc-line short"></div>
+            <div class="doc-line"></div>
+            <div class="doc-line medium"></div>
+            <div class="doc-line short"></div>
+          </div>
+
+          <div class="stamp">
+            JARMUND<br>&amp;CO
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="stats reveal">
+
+    ${h.stats.map(item=>`
+      <div class="stat">
+        <div class="stat-number" data-count="${escapeHtml(item[0])}">
+          ${escapeHtml(item[0])}
+        </div>
+        <div class="stat-label">${escapeHtml(item[1])}</div>
+        ${item[2] ? `<div class="stat-note">${escapeHtml(item[2])}</div>` : ""}
+      </div>
+    `).join("")}
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(h.servicesEyebrow)}</div>
+
+      <div class="grid-2 reveal">
+
+        <h2>${escapeHtml(h.servicesTitle)}</h2>
+
+        <p class="lead" style="margin-top:0">
+          ${escapeHtml(h.servicesText)}
+        </p>
+
+      </div>
+
+      <div style="height:50px"></div>
+
+      <div class="grid-3 stagger reveal">
+
+        ${d.services.slice(0,6).map(serviceCard).join("")}
+
+      </div>
+
+      <div style="height:22px"></div>
+
+      <div class="reveal">
+        <a class="btn btn-secondary" href="#/palvelut" data-route>
+          ${escapeHtml(d.ui.more)}
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(h.howEyebrow)}</div>
+
+      <h2 class="reveal">${escapeHtml(h.howTitle)}</h2>
+
+      <div class="steps" style="margin-top:45px">
+
+        ${h.steps.map(step=>`
+          <div class="step reveal">
+            <div class="step-number">${escapeHtml(step[0])}</div>
+            <div>
+              <h3>${escapeHtml(step[1])}</h3>
+              <p>${escapeHtml(step[2])}</p>
+            </div>
+          </div>
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section trust">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(h.trustEyebrow)}</div>
+
+      <h2 class="reveal">${escapeHtml(h.trustTitle)}</h2>
+
+      <div class="trust-grid stagger reveal">
+
+        ${h.trust.map(item=>`
+          <div class="trust-item">
+            <h3>${escapeHtml(item[0])}</h3>
+            <p>${escapeHtml(item[1])}</p>
+          </div>
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(h.situationsEyebrow)}</div>
+
+      <h2 class="reveal">${escapeHtml(h.situationsTitle)}</h2>
+
+      <div class="grid-3 stagger reveal" style="margin-top:45px">
+
+        ${h.situations.map((x,i)=>`
+          <div class="card">
+            <div class="card-number">0${i+1}</div>
+            <h3>${escapeHtml(x)}</h3>
+          </div>
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container grid-2">
+
+      <div class="reveal">
+
+        <div class="eyebrow">
+          ${escapeHtml(h.mistakesTitle)}
+        </div>
+
+        <h2>${escapeHtml(
+          state.lang==="fi"
+          ? "Vältä nämä ennen kuin asia kasvaa."
+          : state.lang==="ru"
+          ? "Избегайте этих ошибок до того, как ситуация усложнится."
+          : state.lang==="sv"
+          ? "Undvik dessa misstag innan situationen blir mer komplicerad."
+          : "Avoid these mistakes before the situation becomes more complicated."
+        )}</h2>
+
+      </div>
+
+      <div class="card reveal">
+
+        ${h.mistakes.map((x,i)=>`
+          <div style="
+            display:flex;
+            gap:16px;
+            padding:15px 0;
+            border-bottom:${i===h.mistakes.length-1 ? "0":"1px solid var(--ln)"};
+          ">
+            <strong style="color:var(--b)">0${i+1}</strong>
+            <span>${escapeHtml(x)}</span>
+          </div>
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(h.sampleEyebrow)}</div>
+
+      <h2 class="reveal">${escapeHtml(h.sampleTitle)}</h2>
+
+      <div class="demo-notice reveal" style="margin-top:28px">
+        ${escapeHtml(d.ui.sample)}
+      </div>
+
+      <div class="grid-3 stagger reveal">
+
+        ${h.samples.map(item=>`
+          <div class="card">
+            <h3>${escapeHtml(item[0])}</h3>
+            <p style="margin-top:25px">${escapeHtml(item[1])}</p>
+          </div>
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+function serviceCard(service){
+
+  const d=D();
+
+  return `
+    <a href="#/palvelut/${service[0]}" data-route class="card">
+
+      <div class="card-number">${escapeHtml(service[1])}</div>
+
+      <h3>${escapeHtml(service[2])}</h3>
+
+      <p>${escapeHtml(service[3])}</p>
+
+      <div class="card-price">${escapeHtml(service[4])}</div>
+
+      <span class="card-arrow">→</span>
+
+    </a>
+  `;
+}
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+function renderServices(){
+
+  const d=D();
+
+  return `
+
+  <section class="detail-hero">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(d.nav.services)}</div>
+
+      <h1 class="reveal">
+        ${escapeHtml(
+          state.lang==="fi"
+          ? "Oikeudelliset palvelut"
+          : state.lang==="ru"
+          ? "Юридические услуги"
+          : state.lang==="sv"
+          ? "Juridiska tjänster"
+          : "Legal services"
+        )}
+      </h1>
+
+      <p class="lead reveal">
+        ${escapeHtml(d.home.servicesText)}
+      </p>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="grid-3 stagger reveal">
+
+        ${d.services.map(serviceCard).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+/* =========================================================
+   SERVICE DETAIL
+========================================================= */
+
+function renderServiceDetail(id){
+
+  const d=D();
+
+  const service=d.services.find(x=>x[0]===id);
+
+  if(!service){
+
+    return renderNotFound();
+
+  }
+
+  const details={
+    fi:{
+      rikos:"Rikosasioissa oikea-aikainen neuvonta voi olla tärkeää jo ennen kuulustelua. Voimme auttaa arvioimaan asemaasi, asiakirjoja ja seuraavia vaiheita.",
+      riita:"Riita-asiassa ensimmäinen vaihe on yleensä selvittää, mitä sopimuksissa, asiakirjoissa ja lain säännöksissä todella sanotaan.",
+      perhe:"Perheeseen liittyvissä asioissa tavoitteena on ratkaista juridiset kysymykset mahdollisimman selkeästi ja huomioida samalla käytännön seuraukset.",
+      perinto:"Kuolinpesän ja perinnönjaon yhteydessä tarvitaan usein asiakirjojen tarkistamista, osakkaiden tilanteen selvittämistä ja jaon valmistelua.",
+      tyo:"Työoikeudellisissa tilanteissa määräajat ja kirjalliset asiakirjat voivat olla merkittäviä. Arvioimme tilanteen ja mahdolliset seuraavat toimenpiteet.",
+      migri:"Maahanmuuttoasioissa päätösten perustelut, määräajat ja muutoksenhakuoikeus ovat keskeisiä. Autamme hahmottamaan vaihtoehdot.",
+      yritys:"Yritysjuridiikassa ennakointi voi vähentää myöhempiä riskejä. Apua voidaan antaa esimerkiksi sopimuksiin ja yrityksen perustamiseen liittyvissä kysymyksissä."
+    },
+    ru:{
+      rikos:"В уголовных делах своевременная консультация может иметь значение уже до допроса. Мы можем помочь оценить вашу позицию, документы и следующие шаги.",
+      riita:"В гражданском споре первым этапом обычно является выяснение того, что именно предусмотрено договорами, документами и законом.",
+      perhe:"В семейных делах важно ясно решить юридические вопросы и одновременно учитывать практические последствия.",
+      perinto:"При работе с наследственным имуществом часто требуется проверка документов, определение круга наследников и подготовка раздела.",
+      tyo:"В трудовых делах важны сроки и письменные документы. Мы оцениваем ситуацию и возможные дальнейшие действия.",
+      migri:"В миграционных делах ключевое значение имеют мотивировка решения, сроки и право на обжалование. Мы помогаем определить варианты.",
+      yritys:"В корпоративном праве предварительное планирование может снизить будущие риски. Помощь возможна в вопросах создания компании и договоров."
+    },
+    sv:{
+      rikos:"I brottmål kan rådgivning i rätt tid vara viktig redan före ett förhör. Vi kan hjälpa till att bedöma din situation, dokument och nästa steg.",
+      riita:"I en tvist är det ofta viktigt att först klarlägga vad avtal, dokument och lag faktiskt säger.",
+      perhe:"I familjerättsliga frågor är målet att lösa de juridiska frågorna tydligt och samtidigt beakta de praktiska konsekvenserna.",
+      perinto:"Vid dödsbo och arvskifte behövs ofta granskning av handlingar, utredning av delägare och förberedelse av arvskiftet.",
+      tyo:"I arbetsrättsliga situationer kan tidsfrister och skriftliga handlingar vara viktiga. Vi bedömer situationen och möjliga nästa åtgärder.",
+      migri:"I migrationsärenden är beslutets motivering, tidsfrister och möjligheten att överklaga centrala. Vi hjälper dig att förstå alternativen.",
+      yritys:"Inom företagsjuridiken kan framförhållning minska framtida risker. Vi kan hjälpa med exempelvis avtal och företagsbildning."
+    },
+    en:{
+      rikos:"In criminal matters, timely advice can be important even before questioning. We can help assess your position, documents and next steps.",
+      riita:"In a civil dispute, the first step is often to establish what the contracts, documents and applicable law actually say.",
+      perhe:"In family matters, the aim is to resolve the legal questions clearly while also considering the practical consequences.",
+      perinto:"Estate and inheritance matters often require document review, clarification of the parties involved and preparation of the division.",
+      tyo:"In employment matters, deadlines and written documents can be important. We assess the situation and possible next steps.",
+      migri:"In immigration matters, the reasoning of the decision, deadlines and appeal rights are central. We help you understand the available options.",
+      yritys:"In corporate law, planning ahead can reduce future risks. Assistance can cover matters such as contracts and company formation."
+    }
+  };
+
+  const text=details[state.lang][id];
+
+  return `
+
+  <section class="detail-hero">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(d.nav.services)}</div>
+
+      <h1 class="reveal">${escapeHtml(service[2])}</h1>
+
+      <p class="lead reveal">${escapeHtml(service[3])}</p>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="detail-body reveal">
+
+        <h3>
+          ${escapeHtml(
+            state.lang==="fi"
+            ? "Miten voimme auttaa"
+            : state.lang==="ru"
+            ? "Как мы можем помочь"
+            : state.lang==="sv"
+            ? "Hur vi kan hjälpa"
+            : "How we can help"
+          )}
+        </h3>
+
+        <p>${escapeHtml(text)}</p>
+
+        <h3>
+          ${escapeHtml(
+            state.lang==="fi"
+            ? "Esimerkkihinta"
+            : state.lang==="ru"
+            ? "Примерная стоимость"
+            : state.lang==="sv"
+            ? "Exempel på pris"
+            : "Example pricing"
+          )}
+        </h3>
+
+        <p>
+          <strong style="color:var(--b)">
+            ${escapeHtml(service[4])}
+          </strong>
+        </p>
+
+        <h3>
+          ${escapeHtml(
+            state.lang==="fi"
+            ? "Seuraava askel"
+            : state.lang==="ru"
+            ? "Следующий шаг"
+            : state.lang==="sv"
+            ? "Nästa steg"
+            : "Next step"
+          )}
+        </h3>
+
+        <p>
+          ${escapeHtml(
+            state.lang==="fi"
+            ? "Ota yhteyttä ja kuvaile lyhyesti tilanteesi. Ensimmäinen yhteydenotto ei sido sinua toimeksiantoon."
+            : state.lang==="ru"
+            ? "Свяжитесь с нами и кратко опишите ситуацию. Первичное обращение не обязывает вас заключать договор."
+            : state.lang==="sv"
+            ? "Kontakta oss och beskriv kort din situation. Den första kontakten innebär inget krav på att ingå ett uppdrag."
+            : "Contact us and briefly describe your situation. The initial contact does not commit you to an engagement."
+          )}
+        </p>
+
+        <div style="margin-top:35px">
+          <a class="btn btn-primary" href="#/yhteys" data-route>
+            ${escapeHtml(d.ui.contact)}
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+/* =========================================================
+   PRICING
+========================================================= */
+
+function renderPricing(){
+
+  const d=D();
+
+  return `
+
+  <section class="detail-hero">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(d.pricing.eyebrow)}</div>
+
+      <h1 class="reveal">${escapeHtml(d.pricing.title)}</h1>
+
+      <p class="lead reveal">${escapeHtml(d.pricing.intro)}</p>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="price-table reveal">
+
+        ${d.pricing.rows.map(row=>`
+          <div class="price-row">
+            <strong>${escapeHtml(row[0])}</strong>
+            <span>${escapeHtml(row[1])}</span>
+          </div>
+        `).join("")}
+
+      </div>
+
+      <p class="muted" style="margin-top:20px;font-size:11px">
+        ${escapeHtml(d.pricing.note)}
+      </p>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+/* =========================================================
+   GUIDES
+========================================================= */
+
+function renderGuides(){
+
+  const d=D();
+
+  return `
+
+  <section class="detail-hero">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(d.nav.guides)}</div>
+
+      <h1 class="reveal">
+        ${escapeHtml(
+          state.lang==="fi"
+          ? "Käytännön juridiset oppaat"
+          : state.lang==="ru"
+          ? "Практические юридические гайды"
+          : state.lang==="sv"
+          ? "Praktiska juridiska guider"
+          : "Practical legal guides"
+        )}
+      </h1>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="guide-list reveal">
+
+        ${d.guides.map(g=>`
+          <a class="guide-item" href="#/oppaat/${g[0]}" data-route>
+            <span>${escapeHtml(g[1])}</span>
+            <span class="guide-arrow">→</span>
+          </a>
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+/* =========================================================
+   GUIDE DETAIL
+========================================================= */
+
+function renderGuideDetail(id){
+
+  const d=D();
+
+  const guide=d.guides.find(x=>x[0]===id);
+
+  if(!guide) return renderNotFound();
+
+  const content={
+
+    perinnonjako:{
+      fi:["Perinnönjako askel askeleelta","Selvitä ensin kuolinpesän osakkaat, varat, velat ja olemassa olevat asiakirjat.","Tarkista testamentti ja mahdolliset ennakkoperinnöt.","Laadi perukirja ja selvitä pesän velat.","Sopikaa perinnönjaosta tai käyttäkää tarvittaessa ulkopuolista apua.","Dokumentoi lopputulos kirjallisesti."],
+      ru:["Раздел наследства шаг за шагом","Сначала определите наследников, активы, долги и имеющиеся документы.","Проверьте завещание и возможные авансы наследства.","Подготовьте сведения о наследственном имуществе и долгах.","Согласуйте раздел наследства или при необходимости обратитесь за помощью.","Зафиксируйте результат письменно."],
+      sv:["Arvskifte steg för steg","Börja med att identifiera dödsbodelägare, tillgångar, skulder och befintliga handlingar.","Kontrollera testamente och eventuella förskott på arv.","Sammanställ dödsboets tillgångar och skulder.","Avtala om arvskiftet eller ta hjälp vid behov.","Dokumentera resultatet skriftligen."],
+      en:["Estate division step by step","Start by identifying the estate beneficiaries, assets, debts and available documents.","Check the will and any potential advances on inheritance.","Prepare the information concerning the estate's assets and debts.","Agree on the division or obtain professional assistance where necessary.","Document the result in writing."]
+    },
+
+    poliisi:{
+      fi:["Poliisi kutsui kuulusteluun","Selvitä missä asemassa sinua kuullaan ja mistä asiasta.","Älä arvaa tai täydennä muistiasi tarpeettomasti.","Jos et ymmärrä kysymystä, pyydä se selitettäväksi.","Harkitse oikeudellista neuvontaa ennen lausuntojen antamista.","Säilytä kaikki kutsuun liittyvät asiakirjat."],
+      ru:["Вас вызвали в полицию на допрос","Выясните, в каком процессуальном статусе вас вызывают и по какому делу.","Не пытайтесь угадывать или дополнять память без необходимости.","Если вы не понимаете вопрос, попросите его объяснить.","Рассмотрите возможность получить юридическую консультацию до дачи объяснений.","Сохраните все документы, связанные с вызовом."],
+      sv:["Polisen kallade dig till förhör","Ta reda på i vilken ställning du hörs och vad saken gäller.","Gissa inte eller fyll inte i minnet utan anledning.","Be om en förklaring om du inte förstår frågan.","Överväg juridisk rådgivning innan du lämnar uppgifter.","Spara alla handlingar som gäller kallelsen."],
+      en:["Police called you for questioning","Find out in what capacity you are being questioned and what the matter concerns.","Do not guess or fill gaps in your memory unnecessarily.","Ask for clarification if you do not understand a question.","Consider legal advice before providing a statement.","Keep all documents related to the summons."]
+    },
+
+    migri:{
+      fi:["Kielteinen Migri-päätös","Lue päätös ja sen perustelut kokonaan.","Tarkista muutoksenhaun määräaika välittömästi.","Säilytä päätös ja kaikki liitteet.","Selvitä, onko asiassa uusia asiakirjoja tai muita perusteita.","Hanki tarvittaessa oikeudellinen arvio ennen määräajan päättymistä."],
+      ru:["Отрицательное решение Migri","Полностью прочитайте решение и его мотивировку.","Немедленно проверьте срок обжалования.","Сохраните решение и все приложения.","Выясните, есть ли новые документы или другие основания.","При необходимости получите юридическую оценку до истечения срока."],
+      sv:["Avslag från Migri","Läs beslutet och motiveringen noggrant.","Kontrollera överklagandetiden omedelbart.","Spara beslutet och alla bilagor.","Utred om det finns nya handlingar eller andra grunder.","Sök vid behov juridisk bedömning innan tidsfristen löper ut."],
+      en:["Negative Migri decision","Read the decision and its reasoning in full.","Check the appeal deadline immediately.","Keep the decision and all attachments.","Determine whether there are new documents or other grounds that may be relevant.","If necessary, obtain legal advice before the deadline expires."]
+    },
+
+    avioero:{
+      fi:["Avioero Suomessa","Selvitä ensin asumiseen, lapsiin, omaisuuteen ja velkoihin liittyvät kysymykset.","Kerää tärkeät taloudelliset asiakirjat.","Sovi väliaikaisista käytännön järjestelyistä tarvittaessa.","Selvitä omaisuuden ositus ja mahdolliset sopimukset.","Käytä asiantuntijaa, jos tilanteeseen liittyy riitaa tai merkittäviä varoja."],
+      ru:["Развод в Финляндии","Сначала определите вопросы проживания, детей, имущества и долгов.","Соберите важные финансовые документы.","При необходимости договоритесь о временных практических решениях.","Разберитесь с разделом имущества и возможными соглашениями.","При споре или значительном имуществе рассмотрите возможность консультации специалиста."],
+      sv:["Skilsmässa i Finland","Klargör först frågor om boende, barn, egendom och skulder.","Samla viktiga ekonomiska handlingar.","Avtala vid behov om tillfälliga praktiska arrangemang.","Utred bodelning och eventuella avtal.","Ta hjälp av en expert om det finns en tvist eller betydande tillgångar."],
+      en:["Divorce in Finland","First identify questions concerning housing, children, assets and debts.","Gather important financial documents.","Agree on temporary practical arrangements where necessary.","Clarify the division of marital property and possible agreements.","Consider professional assistance if there is a dispute or significant property."]
+    },
+
+    tyo:{
+      fi:["Työnantaja irtisanoi","Tarkista irtisanomisilmoitus ja työsopimus.","Kirjaa päivämäärät ja säilytä kaikki viestit.","Tarkista mahdolliset määräajat.","Älä allekirjoita uutta sopimusta ennen kuin ymmärrät sen sisällön.","Hanki tarvittaessa arvio tilanteesta nopeasti."],
+      ru:["Работодатель вас уволил","Проверьте уведомление об увольнении и трудовой договор.","Запишите даты и сохраните переписку.","Проверьте возможные сроки.","Не подписывайте новый документ, пока полностью не понимаете его содержание.","При необходимости быстро получите юридическую оценку ситуации."],
+      sv:["Arbetsgivaren sade upp dig","Kontrollera uppsägningsmeddelandet och anställningsavtalet.","Dokumentera datum och spara all kommunikation.","Kontrollera eventuella tidsfrister.","Skriv inte under nya handlingar innan du förstår innehållet.","Sök vid behov en juridisk bedömning snabbt."],
+      en:["Your employer terminated your employment","Check the termination notice and employment agreement.","Record the relevant dates and keep all communication.","Check any applicable deadlines.","Do not sign a new document until you understand its contents.","Obtain legal advice promptly if necessary."]
+    }
+
+  };
+
+  const c=content[id][state.lang];
+
+  return `
+
+  <section class="detail-hero">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(d.nav.guides)}</div>
+
+      <h1 class="reveal">${escapeHtml(c[0])}</h1>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <article class="detail-body reveal">
+
+        <p class="lead" style="margin-top:0">
+          ${escapeHtml(c[1])}
+        </p>
+
+        <h3>
+          ${escapeHtml(
+            state.lang==="fi" ? "Tarkistuslista" :
+            state.lang==="ru" ? "Чек-лист" :
+            state.lang==="sv" ? "Checklista" :
+            "Checklist"
+          )}
+        </h3>
+
+        <ul>
+          ${c.slice(2).map(x=>`<li>${escapeHtml(x)}</li>`).join("")}
+        </ul>
+
+        <div class="demo-notice" style="margin-top:40px">
+          ${escapeHtml(
+            state.lang==="fi"
+            ? "Tämä opas on yleisluonteinen eikä korvaa yksittäiseen tilanteeseen annettavaa oikeudellista neuvontaa."
+            : state.lang==="ru"
+            ? "Этот материал носит общий информационный характер и не заменяет юридическую консультацию по конкретной ситуации."
+            : state.lang==="sv"
+            ? "Denna guide är allmän information och ersätter inte juridisk rådgivning i ett enskilt ärende."
+            : "This guide is general information and does not replace legal advice for an individual matter."
+          )}
+        </div>
+
+        <a class="btn btn-primary" href="#/yhteys" data-route>
+          ${escapeHtml(d.ui.contact)}
+        </a>
+
+      </article>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+function renderAbout(){
+
+  const d=D();
+  const a=d.about;
+
+  return `
+
+  <section class="detail-hero">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(a.eyebrow)}</div>
+
+      <h1 class="reveal">${escapeHtml(a.title)}</h1>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container about-block">
+
+      <div class="reveal">
+
+        <p class="lead" style="margin-top:0">
+          ${escapeHtml(a.text1)}
+        </p>
+
+        <p>${escapeHtml(a.text2)}</p>
+
+      </div>
+
+      <div class="about-quote reveal">
+        <p>${escapeHtml(a.quote)}</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(a.valuesEyebrow)}</div>
+
+      <div class="grid-4 stagger reveal">
+
+        ${a.values.map(x=>`
+          <div class="card">
+            <h3>${escapeHtml(x[0])}</h3>
+            <p style="margin-top:18px">${escapeHtml(x[1])}</p>
+          </div>
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">
+        ${escapeHtml(
+          state.lang==="fi" ? "Tiimi" :
+          state.lang==="ru" ? "Команда" :
+          state.lang==="sv" ? "Team" :
+          "Team"
+        )}
+      </div>
+
+      <div class="grid-3 stagger reveal">
+
+        ${d.team.map(member=>`
+
+          <div class="card">
+
+            <div class="team-photo">
+
+              <img
+                src="${escapeHtml(member[3])}"
+                alt="${escapeHtml(member[0])}"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
+              >
+
+              <div class="initials" style="display:none">
+                ${escapeHtml(member[0].split(" ").map(x=>x[0]).join(""))}
+              </div>
+
+            </div>
+
+            <h3>${escapeHtml(member[0])}</h3>
+
+            <div class="team-title">${escapeHtml(member[1])}</div>
+
+            <div class="team-area">${escapeHtml(member[2])}</div>
+
+          </div>
+
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+function renderFaq(){
+
+  const d=D();
+
+  return `
+
+  <section class="detail-hero">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">FAQ</div>
+
+      <h1 class="reveal">
+        ${escapeHtml(
+          state.lang==="fi"
+          ? "Usein kysyttyä"
+          : state.lang==="ru"
+          ? "Часто задаваемые вопросы"
+          : state.lang==="sv"
+          ? "Vanliga frågor"
+          : "Frequently asked questions"
+        )}
+      </h1>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="faq reveal">
+
+        ${d.faq.map((item,i)=>`
+
+          <div class="faq-item ${state.faqOpen===i ? "open":""}">
+
+            <button
+              class="faq-question"
+              type="button"
+              data-faq="${i}"
+              aria-expanded="${state.faqOpen===i}"
+              aria-controls="faq-answer-${i}"
+            >
+
+              <span>${escapeHtml(item[0])}</span>
+
+              <span class="faq-icon"></span>
+
+            </button>
+
+            <div
+              class="faq-answer"
+              id="faq-answer-${i}"
+              style="${state.faqOpen===i ? "grid-template-rows:1fr":""}"
+            >
+              <div class="faq-answer-inner">
+                <p>${escapeHtml(item[1])}</p>
+              </div>
+            </div>
+
+          </div>
+
+        `).join("")}
+
+      </div>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+function renderContact(){
+
+  const d=D();
+  const c=d.contact;
+
+  return `
+
+  <section class="detail-hero">
+
+    <div class="container">
+
+      <div class="eyebrow reveal">${escapeHtml(c.eyebrow)}</div>
+
+      <h1 class="reveal">${escapeHtml(c.title)}</h1>
+
+      <p class="lead reveal">${escapeHtml(c.text)}</p>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container contact-layout">
+
+      <div class="reveal">
+
+        <div class="contact-details">
+
+          <div class="contact-detail">
+            <small>${escapeHtml(
+              state.lang==="fi" ? "Osoite" :
+              state.lang==="ru" ? "Адрес" :
+              state.lang==="sv" ? "Adress" :
+              "Address"
+            )}</small>
+
+            <strong>${escapeHtml(c.address)}<br>${escapeHtml(c.city)}</strong>
+          </div>
+
+          <div class="contact-detail">
+            <small>${escapeHtml(d.ui.email)}</small>
+            <strong>${escapeHtml(c.email)}</strong>
+          </div>
+
+          <div class="contact-detail">
+            <small>${escapeHtml(d.ui.phone)}</small>
+            <strong>${escapeHtml(c.phone)}</strong>
+          </div>
+
+          <div class="contact-detail">
+            <small>${escapeHtml(
+              state.lang==="fi" ? "Yritystunnus" :
+              state.lang==="ru" ? "Регистрационные данные" :
+              state.lang==="sv" ? "Företagsuppgifter" :
+              "Business details"
+            )}</small>
+            <strong>${escapeHtml(c.company)}</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+      <form class="form reveal" id="contactForm">
+
+        <div class="form-row">
+
+          <div class="field">
+            <label>${escapeHtml(d.ui.name)}</label>
+            <input name="name" required>
+          </div>
+
+          <div class="field">
+            <label>${escapeHtml(d.ui.email)}</label>
+            <input type="email" name="email" required>
+          </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="field">
+            <label>${escapeHtml(d.ui.phone)}</label>
+            <input name="phone">
+          </div>
+
+          <div class="field">
+            <label>${escapeHtml(d.ui.service)}</label>
+
+            <select name="service">
+
+              <option value="">
+                —
+              </option>
+
+              ${d.services.map(x=>`
+                <option>${escapeHtml(x[2])}</option>
+              `).join("")}
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="field">
+          <label>${escapeHtml(d.ui.subject)}</label>
+          <input name="subject">
+        </div>
+
+        <div class="field">
+          <label>${escapeHtml(d.ui.message)}</label>
+          <textarea name="message" required></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">
+          ${escapeHtml(d.ui.send)}
+        </button>
+
+        <div class="form-note">
+          ${escapeHtml(d.ui.emailNote)}
+        </div>
+
+      </form>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+/* =========================================================
+   NOT FOUND
+========================================================= */
+
+function renderNotFound(){
+
+  const d=D();
+
+  return `
+
+  <section class="detail-hero">
+
+    <div class="container">
+
+      <div class="eyebrow">404</div>
+
+      <h1>
+        ${escapeHtml(
+          state.lang==="fi" ? "Sivua ei löytynyt." :
+          state.lang==="ru" ? "Страница не найдена." :
+          state.lang==="sv" ? "Sidan hittades inte." :
+          "Page not found."
+        )}
+      </h1>
+
+      <div style="margin-top:30px">
+        <a class="btn btn-primary" href="#/" data-route>
+          ${escapeHtml(
+            state.lang==="fi" ? "Etusivulle" :
+            state.lang==="ru" ? "На главную" :
+            state.lang==="sv" ? "Till startsidan" :
+            "Back to home"
+          )}
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+  `;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+function renderFooter(){
+
+  const d=D();
+
+  document.getElementById("footer").innerHTML=`
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <div class="footer-brand">Jarmund&Co</div>
+          <div class="footer-city">LAHTI</div>
+
+          <p style="
+            margin-top:20px;
+            max-width:300px;
+            color:rgba(255,255,255,.55);
+            font-size:12px;
+          ">
+            ${escapeHtml(d.footer.description)}
+          </p>
+        </div>
+
+        <div>
+
+          <div class="footer-heading">
+            ${escapeHtml(d.footer.navigation)}
+          </div>
+
+          <div class="footer-links">
+
+            <a href="#/palvelut" data-route>${escapeHtml(d.nav.services)}</a>
+            <a href="#/hinnasto" data-route>${escapeHtml(d.nav.pricing)}</a>
+            <a href="#/oppaat" data-route>${escapeHtml(d.nav.guides)}</a>
+            <a href="#/miksi" data-route>${escapeHtml(d.nav.about)}</a>
+            <a href="#/yhteys" data-route>${escapeHtml(d.nav.contact)}</a>
+
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class="footer-heading">
+            ${escapeHtml(d.footer.contact)}
+          </div>
+
+          <div class="footer-links">
+
+            <a href="tel:+358441234567">+358 44 123 4567</a>
+            <a href="mailto:info@jarmundco.fi">info@jarmundco.fi</a>
+            <span style="color:rgba(255,255,255,.55);font-size:12px">
+              Pataljoonankatu 10<br>
+              15550 Lahti
+            </span>
+
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class="footer-heading">
+            ${escapeHtml(
+              state.lang==="fi" ? "Kielet" :
+              state.lang==="ru" ? "Языки" :
+              state.lang==="sv" ? "Språk" :
+              "Languages"
+            )}
+          </div>
+
+          <div class="footer-links">
+
+            <span style="color:rgba(255,255,255,.75);font-size:12px">
+              Suomi
+            </span>
+
+            <span style="color:rgba(255,255,255,.75);font-size:12px">
+              Русский
+            </span>
+
+            <span style="color:rgba(255,255,255,.75);font-size:12px">
+              Svenska
+            </span>
+
+            <span style="color:rgba(255,255,255,.75);font-size:12px">
+              English
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <span>${escapeHtml(d.footer.rights)}</span>
+
+        <span>${escapeHtml(d.footer.notice)}</span>
+
+      </div>
+
+    </div>
+  `;
+}
+
+/* =========================================================
+   ROUTER
+========================================================= */
+
+function render(){
+
+  const r=route();
+  const app=document.getElementById("app");
+
+  if(!r.length){
+
+    app.innerHTML=renderHome();
+
+  }else if(r[0]==="palvelut" && !r[1]){
+
+    app.innerHTML=renderServices();
+
+  }else if(r[0]==="palvelut" && r[1]){
+
+    app.innerHTML=renderServiceDetail(r[1]);
+
+  }else if(r[0]==="hinnasto"){
+
+    app.innerHTML=renderPricing();
+
+  }else if(r[0]==="oppaat" && !r[1]){
+
+    app.innerHTML=renderGuides();
+
+  }else if(r[0]==="oppaat" && r[1]){
+
+    app.innerHTML=renderGuideDetail(r[1]);
+
+  }else if(r[0]==="miksi"){
+
+    app.innerHTML=renderAbout();
+
+  }else if(r[0]==="faq"){
+
+    app.innerHTML=renderFaq();
+
+  }else if(r[0]==="yhteys"){
+
+    app.innerHTML=renderContact();
+
+  }else{
+
+    app.innerHTML=renderNotFound();
+
+  }
+
+  renderNavigation();
+  renderFooter();
+  initReveal();
+  initCounters();
+
+  window.scrollTo({
+    top:0,
+    behavior:"auto"
+  });
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+document.addEventListener("click",e=>{
+
+  const btn=e.target.closest("[data-faq]");
+
+  if(!btn) return;
+
+  const index=Number(btn.dataset.faq);
+
+  state.faqOpen=state.faqOpen===index ? null : index;
+
+  render();
+
+});
+
+/* =========================================================
+   ROUTE LINKS
+========================================================= */
+
+document.addEventListener("click",e=>{
+
+  const link=e.target.closest("[data-route]");
+
+  if(!link) return;
+
+  const href=link.getAttribute("href");
+
+  if(!href || !href.startsWith("#/")) return;
+
+  e.preventDefault();
+
+  if(location.hash!==href){
+    location.hash=href;
+  }else{
+    render();
+  }
+
+});
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+document.addEventListener("submit",e=>{
+
+  if(e.target.id!=="contactForm") return;
+
+  e.preventDefault();
+
+  const d=D();
+  const form=new FormData(e.target);
+
+  const name=form.get("name") || "";
+  const email=form.get("email") || "";
+  const phone=form.get("phone") || "";
+  const service=form.get("service") || "";
+  const subject=form.get("subject") || "";
+  const message=form.get("message") || "";
+
+  const mailSubject=subject ||
+    (
+      state.lang==="fi" ? "Yhteydenotto Jarmund&Co" :
+      state.lang==="ru" ? "Обращение в Jarmund&Co" :
+      state.lang==="sv" ? "Kontakt med Jarmund&Co" :
+      "Contact with Jarmund&Co"
+    );
+
+  const body=
+`${d.ui.name}: ${name}
+${d.ui.email}: ${email}
+${d.ui.phone}: ${phone}
+${d.ui.service}: ${service}
+
+${d.ui.message}:
+${message}`;
+
+  window.location.href=
+    "mailto:"+encodeURIComponent(d.contact.email)+
+    "?subject="+encodeURIComponent(mailSubject)+
+    "&body="+encodeURIComponent(body);
+
+});
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function closeMobileMenu(){
+
+  const menu=document.getElementById("mobileMenu");
+  const toggle=document.getElementById("menuToggle");
+
+  menu.classList.remove("open");
+  document.body.classList.remove("menu-open");
+
+  toggle.setAttribute("aria-expanded","false");
+}
+
+document.getElementById("menuToggle").addEventListener("click",()=>{
+
+  const menu=document.getElementById("mobileMenu");
+  const toggle=document.getElementById("menuToggle");
+
+  const open=menu.classList.toggle("open");
+
+  document.body.classList.toggle("menu-open",open);
+
+  toggle.setAttribute("aria-expanded",String(open));
+
+});
+
+document.getElementById("mobileNav").addEventListener("click",e=>{
+
+  if(e.target.closest("a")){
+    closeMobileMenu();
+  }
+
+});
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+function updateScroll(){
+
+  const header=document.getElementById("siteHeader");
+
+  header.classList.toggle("scrolled",window.scrollY>25);
+
+  const doc=document.documentElement;
+
+  const max=doc.scrollHeight-window.innerHeight;
+
+  const progress=max>0
+    ? (window.scrollY/max)*100
+    : 0;
+
+  document.getElementById("progress").style.width=
+    Math.min(100,Math.max(0,progress))+"%";
+}
+
+window.addEventListener("scroll",updateScroll,{passive:true});
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+function initReveal(){
+
+  const elements=document.querySelectorAll(".reveal");
+
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+
+    elements.forEach(el=>el.classList.add("visible"));
+    return;
+
+  }
+
+  const observer=new IntersectionObserver(entries=>{
+
+    entries.forEach(entry=>{
+
+      if(entry.isIntersecting){
+
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+
+      }
+
+    });
+
+  },{
+    threshold:.12,
+    rootMargin:"0px 0px -35px 0px"
+  });
+
+  elements.forEach(el=>observer.observe(el));
+}
+
+/* =========================================================
+   COUNTERS
+========================================================= */
+
+function initCounters(){
+
+  const counters=document.querySelectorAll("[data-count]");
+
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  counters.forEach(el=>{
+
+    const value=el.dataset.count;
+
+    if(!/^\d+/.test(value)) return;
+
+    const match=value.match(/^(\d+)/);
+
+    if(!match) return;
+
+    const target=Number(match[1]);
+
+    if(target>100) return;
+
+    let start=0;
+    const duration=850;
+    const startTime=performance.now();
+
+    function tick(now){
+
+      const progress=Math.min(
+        1,
+        (now-startTime)/duration
+      );
+
+      const eased=1-Math.pow(1-progress,3);
+
+      const current=Math.round(target*eased);
+
+      el.textContent=
+        current+
+        value.replace(/^\d+/,"");
+
+      if(progress<1){
+        requestAnimationFrame(tick);
+      }
+
+    }
+
+    requestAnimationFrame(tick);
+
+  });
+}
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+document.documentElement.lang=state.lang;
+
+document.title=D().meta.title;
+
+const description=document.querySelector('meta[name="description"]');
+
+if(description){
+  description.content=D().meta.description;
+}
+
+render();
+updateLanguageSwitcher();
+updateScroll();
+
+window.addEventListener("hashchange",()=>{
+  state.faqOpen=null;
+  render();
+  updateScroll();
+});
+
+</script>
+
+</body>
+</html>
